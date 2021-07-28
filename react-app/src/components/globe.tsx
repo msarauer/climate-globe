@@ -1,13 +1,14 @@
 import React from 'react';
 import Globe from 'react-globe.gl';
-import * as d3 from 'd3'
+import * as d3 from 'd3';
 
 
 const { useState, useEffect, useRef } = React;
 
 const World = () => {
-    const globeEl = useRef();
+    const globeEl = useRef<any>(null);
     const [popData, setPopData] = useState([]);
+
 
     // useEffect(() => {
     //   // load data
@@ -16,11 +17,14 @@ const World = () => {
     //     .then(setPopData);
     // }, []);
 
-    // useEffect(() => {
-    //   // Auto-rotate
-    //   globeEl.current.controls().autoRotate = true;
-    //   globeEl.current.controls().autoRotateSpeed = 0.1;
-    // }, []);
+  useEffect(() => {
+    // Auto-rotate
+      if(null !== globeEl.current) {
+        globeEl.current.controls().autoRotate = true;
+        globeEl.current.controls().autoRotateSpeed = 1;
+
+      }
+  }, []);
 
     const weightColor = d3.scaleSequentialSqrt(d3.interpolateYlOrRd)
       .domain([0, 1e7]);
