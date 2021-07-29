@@ -44,7 +44,7 @@ const convertLongitude = (long) => {
 };
 
 const convertToKelvin = (temp) => {
-  return temp + 273.15;
+  return temp + 50;
 };
 
 const printJsonToFile = async () => {
