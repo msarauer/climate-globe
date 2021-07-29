@@ -1,6 +1,7 @@
 import React from 'react';
 import Globe from 'react-globe.gl';
 import * as d3 from 'd3';
+import data from '../data/json-data1.json';
 
 
 const { useState, useEffect, useRef } = React;
@@ -8,21 +9,20 @@ const { useState, useEffect, useRef } = React;
 const World = () => {
     const globeEl = useRef<any>(null);
     const [popData, setPopData] = useState([]);
-
-
-    // useEffect(() => {
-    //   // load data
-    //   fetch('../datasets/world_population.csv').then(res => res.text())
-    //     .then(csv => d3.csvParse(csv, ({ lat, lng, pop }) => ({ lat: +lat, lng: +lng, pop: +pop })))
+        
+    useEffect(() => {
+      console.log('data', data);
+      //   // load data
+    //   // fetch('./data/json-data1.json').then(res => res.text())
+    //     d3.json(data, ({ lat, lng, pop }) => ({ lat: +lat, lng: +lng, pop: +pop })))
     //     .then(setPopData);
-    // }, []);
+    }, []);
 
   useEffect(() => {
     // Auto-rotate
       if(null !== globeEl.current) {
         globeEl.current.controls().autoRotate = true;
         globeEl.current.controls().autoRotateSpeed = 1;
-
       }
   }, []);
 
