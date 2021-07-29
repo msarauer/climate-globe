@@ -5,10 +5,14 @@ import data from "../data/json-data1.json";
 
 const { useEffect, useRef } = React;
 
-const World = () => {
+interface Props {
+  mode: boolean;
+}
+
+const World = (props: Props) => {
   const globeEl = useRef<any>(null);
   // const [popData, setPopData] = useState([]);
-
+  const { mode } = props;
   const objData = data.map((d) => ({
     lat: d[1],
     lng: d[2],
@@ -34,18 +38,22 @@ const World = () => {
   }, []);
 
   const weightColor = d3
-    .scaleSequentialSqrt(d3.interpolateYlOrRd)
-    .domain([0, 1e7]);
+    .scaleSequentialSqrt(d3.interpolateRdYlBu)
+    .domain([90, 50]);
 
   return (
     <Globe
       ref={globeEl}
-      globeImageUrl="//unpkg.com/three-globe/example/img/earth-night.jpg"
+      globeImageUrl={
+        mode
+          ? "//unpkg.com/three-globe/example/img/earth-night.jpg"
+          : "//unpkg.com/three-globe/example/img/earth-day.jpg"
+      }
       bumpImageUrl="//unpkg.com/three-globe/example/img/earth-topology.png"
       backgroundImageUrl="//unpkg.com/three-globe/example/img/night-sky.png"
       hexBinPointsData={objData}
       hexBinPointWeight="temp"
-      hexAltitude={(d) => (d.sumWeight - 210) * 0.005}
+      hexAltitude={(d) => d.sumWeight * 0.002}
       hexBinResolution={4}
       hexTopColor={(d) => weightColor(d.sumWeight)}
       hexSideColor={(d) => weightColor(d.sumWeight)}

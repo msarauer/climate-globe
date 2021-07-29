@@ -1,16 +1,13 @@
-import React from 'react';
-import World from './components/globe'
-import Toggle from './components/toggle';
-
-// hells yeah
-// fuckshitstack, stickasdfasdf your finger in my thresher
-// suck my jagarm
+import React, { useState } from "react";
+import World from "./components/globe";
+import Toggle from "./components/toggle";
 
 function App() {
+  const [mode, setMode] = useState(true);
   return (
     <div className="App">
-      <Toggle/>
-      <World/>
+      <Toggle setMode={setMode} mode={mode} />
+      <World mode={mode} />
     </div>
   );
 }
