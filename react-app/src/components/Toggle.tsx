@@ -68,15 +68,13 @@ const Toggle = (props: Props) => {
     checked: classes.checked,
   }
   return (
-    <div style={{ position: "absolute", top: 50, left: 50, zIndex: 200 }}>
-      <Switch
-        icon={<Brightness3Icon fontSize="large" />}
-        checkedIcon={<BrightnessHighIcon fontSize='large' />}
-        onChange={() => setMode(!mode)}
-        color="secondary"
-        classes={classObj}
-      />
-    </div>
+    <Switch
+      icon={<Brightness3Icon fontSize="large" />}
+      checkedIcon={<BrightnessHighIcon fontSize='large' />}
+      onChange={() => setMode(!mode)}
+      color="secondary"
+      classes={classObj}
+    />
   );
 };
 

@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import World from "./components/globe";
-import Toggle from "./components/toggle";
+import ControlsBox from "./components/ControlsBox";
 
 function App() {
   const [mode, setMode] = useState(true);
   return (
     <div className="App">
-      <Toggle setMode={setMode} mode={mode} />
+      <ControlsBox mode={mode} setMode={setMode} />
       <World mode={mode} />
     </div>
   );
