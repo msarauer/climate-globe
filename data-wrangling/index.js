@@ -57,8 +57,11 @@ const convertToKelvin = (temp) => {
   return temp + 50;
 };
 
-const printJsonToFile = async (year) => {
-  const dataArray = await getExcelData('./excel-files/data-12-2016.xlsx', year);
+const printJsonToFile = async () => {
+  console.log(process.argv);
+  const file = process.argv[2];
+  const year = Number(process.argv[3]);
+  const dataArray = await getExcelData(`./excel-files/${file}`, year);
 
   dataArray.map(d => {
     d[1] = convertLatitude(d[1]);
