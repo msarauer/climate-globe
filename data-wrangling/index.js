@@ -23,6 +23,13 @@ const getExcelData = async (file, year) => {
   console.table(filteredRows[99]);
 
   switch (year) {
+    case 2005:
+      filteredRows = filteredRows.map(r => [r[0], r[14], r[17], r[21], r[31]]);
+      break;
+    case 2010:
+      filteredRows = filteredRows.map(r => [r[0], r[13], r[17], r[21], r[31]]);
+      break;
+    case 2017:
     case 2018:
       filteredRows = filteredRows.map(r => [r[0], r[12], r[15], r[19], r[28]]);
       break;

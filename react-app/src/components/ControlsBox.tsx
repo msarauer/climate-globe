@@ -5,17 +5,19 @@ import './ControlsBox.scss'
 
 interface Props {
   setMode: React.Dispatch<React.SetStateAction<boolean>>;
+  setYear: React.Dispatch<React.SetStateAction<number>>;
+  year: number;
   mode: boolean;
 }
 
 const ControlsBox = (props: Props) => {
 
-  const { setMode, mode } = props;
+  const { setMode, mode, setYear, year } = props;
 
   return (
   <div className="control-box">
     <Toggle setMode={setMode} mode={mode}/>
-    <DiscreteSlider />
+    <DiscreteSlider year={year} setYear={setYear} />
   </div>
   );
 };

@@ -17,17 +17,22 @@ function valuetext(value : any) {
 }
 
 const years = [
-  { value: 1990, label: 1990 },
-  { value: 2000, label: 2000 },
+  { value: 2005, label: 2005 },
   { value: 2010, label: 2010 },
   { value: 2016, label: 2016 },
   { value: 2017, label: 2017 },
   { value: 2018, label: 2018 },
 ];
 
-export default function DiscreteSlider() {
+interface Props {
+  setYear: React.Dispatch<React.SetStateAction<number>>;
+  year: number;
+  
+}
+
+export default function DiscreteSlider(props: Props) {
+  const { setYear, year } = props;
   const classes = useStyles();
-  const [year, setYear] = useState(2018);
 
   const handleChange = (event: any, value: number | number[]) => {
     if (typeof value === 'number') {
@@ -44,7 +49,7 @@ export default function DiscreteSlider() {
         valueLabelDisplay="on"
         step={null}
         marks={years}
-        min={1990}
+        min={2005}
         max={2018}
         orientation='vertical'
         value={year}

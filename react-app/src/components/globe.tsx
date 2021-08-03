@@ -1,18 +1,43 @@
 import React from "react";
 import Globe from "react-globe.gl";
 import * as d3 from "d3";
-import data from "../data/json-data1.json";
+import data2005 from "../data/json-data2005.json";
+import data2010 from "../data/json-data2010.json";
+import data2016 from "../data/json-data2016.json";
+import data2017 from "../data/json-data2017.json";
+import data2018 from "../data/json-data2018.json";
+
 
 const { useEffect, useRef } = React;
 
 interface Props {
   mode: boolean;
+  year: number;
 }
 
 const World = (props: Props) => {
   const globeEl = useRef<any>(null);
-  // const [popData, setPopData] = useState([]);
-  const { mode } = props;
+  const { mode,year } = props;
+
+  let data: (string | number | null)[][];
+  switch (year) {
+    case 2005:
+      data = data2005;
+      break;
+    case 2010:
+      data = data2010;
+      break;
+    case 2016:
+      data = data2016;
+      break;
+    case 2017:
+      data = data2017
+      break;
+    default:
+      data = data2018;
+      break;
+  }
+  
   const objData = data.map((d) => ({
     lat: d[1],
     lng: d[2],
