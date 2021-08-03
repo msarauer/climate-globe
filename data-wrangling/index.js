@@ -1,7 +1,7 @@
 const fs = require('fs').promises;
 const xlsxFile = require('read-excel-file/node');
 
-const getExcelData = async (file) => {
+const getExcelData = async (file, year) => {
   const rows = await xlsxFile(file);
   let filteredRows = [];
 
@@ -20,8 +20,18 @@ const getExcelData = async (file) => {
     return true;
   });
 
-  filteredRows = filteredRows.map(r => [r[0], r[12], r[15], r[19], r[28]]);
+  console.table(filteredRows[99]);
 
+  switch (year) {
+    case 2018:
+      filteredRows = filteredRows.map(r => [r[0], r[12], r[15], r[19], r[28]]);
+      break;
+    case 2016:
+      filteredRows = filteredRows.map(r => [r[0], r[13], r[16], r[20], r[29]]);
+      break;
+    default:
+      break;
+  }
   return filteredRows;
 };
 
@@ -47,8 +57,8 @@ const convertToKelvin = (temp) => {
   return temp + 50;
 };
 
-const printJsonToFile = async () => {
-  const dataArray = await getExcelData('./excel-files/data-12-2018.xlsx');
+const printJsonToFile = async (year) => {
+  const dataArray = await getExcelData('./excel-files/data-12-2016.xlsx', year);
 
   dataArray.map(d => {
     d[1] = convertLatitude(d[1]);
@@ -59,12 +69,12 @@ const printJsonToFile = async () => {
 
   const asJson = JSON.stringify(dataArray);
 
-  const files = await fs.readdir('./json-files');
+  // const files = await fs.readdir('./json-files');
 
-  await fs.writeFile(`./json-files/json-data${files.length + 1}.json`, asJson);
+  await fs.writeFile(`./json-files/json-data${year}.json`, asJson);
 };
 
-printJsonToFile()
+printJsonToFile(2016);
 
 
 // [["01001  JAN MAYEN","7056N","00840W",10,-1.6]
